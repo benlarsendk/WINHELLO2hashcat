@@ -59,6 +59,8 @@ def parse_ngc_dir(ngcdir_path: str, software_hive_path: Optional[str]) -> {Prote
     reg = registry.Regedit() if software_hive_path else None
 
     for d in os.listdir(ngcdir_path):
+        if d.lower() == "pregenpool":
+            continue  # Ignore PregenPool instead of failing
         if guid_re.match(d):
             sid_file_path = os.path.join(ngcdir_path, d, '1.dat')
             first_protectors_dirpath = os.path.join(ngcdir_path, d, 'Protectors', '1')
